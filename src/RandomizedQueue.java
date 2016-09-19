@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 
 /**
  *
+ * Basic idea with RandomizedQueue is, Array based queue.
+ * Since its randomized Queue we dont have to worry about
  * Created by sunilpatil on 9/14/16.
  */
 public class RandomizedQueue<Item> implements Iterable<Item> {
