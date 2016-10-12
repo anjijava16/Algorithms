@@ -1,8 +1,7 @@
 package com.algo4.chapter3;
 
-import com.algo4.chapter1.section3.Queue;
 
-import javax.management.Query;
+import edu.princeton.cs.algs4.Queue;
 
 /**
  * Created by sunilpatil on 10/3/16.
@@ -10,28 +9,25 @@ import javax.management.Query;
 public class BST<Key extends Comparable<Key>, Value>  {
 
     private Node root;
-    private class Node{
-        private Key key;
-        private Value value;
-        private Node left, right;
-        private int count;
 
-        public Node(Key key, Value value, int count){
-            this.key = key;
-            this.value = value;
-            this.count = count;
-        }
+    public static void main(String[] argv) {
+        BST<String, Integer> st = new BST<>();
+        st.put("first", 1);
 
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "key=" + key +
-                    ", value=" + value +
-                    ", left=" + left +
-                    ", right=" + right +
-                    ", count=" + count +
-                    '}';
-        }
+        st.put("second", 2);
+
+        st.put("third", 3);
+        st.put("fourth", 4);
+        st.put("fifth", 5);
+        st.put("sixth", 6);
+        st.put("seventh", 7);
+        st.put("eigth", 8);
+        st.put("ninth", 9);
+        st.put("tenth", 10);
+
+        for (String s : st.keys())
+            System.out.println(s + " " + st.get(s));
+
     }
 
     public void put(Key key, Value value){
@@ -75,9 +71,17 @@ public class BST<Key extends Comparable<Key>, Value>  {
         return x.key;
     }
 
+
     public Key max(){
         Node y = root;
         while(y.right != null){
+            y = y.right;
+        }
+        return y.key;
+    }
+
+    public Key max(Node y) {
+        while (y.right != null) {
             y = y.right;
         }
         return y.key;
@@ -171,28 +175,77 @@ public class BST<Key extends Comparable<Key>, Value>  {
             return size(x.left);
     }
 
-    public void delete(Key key){}
+    public void deleteMin() {
+        root = deleteMin(root);
+    }
 
-    public Iterable<Key> iterator(){
+    private Node deleteMin(Node x) {
+        if (x.left == null)
+            return x.right;
+        x.left = deleteMin(x.left);
+        x.count = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
+    public void delete(Key key) {
+        root = delete(root, key);
+    }
+
+    private Node delete(Node x, Key key) {
+        if (x == null)
+            return null;
+
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0)
+            x.left = delete(x.left, key);
+        else if (cmp > 0)
+            x.right = delete(x.right, key);
+        else {
+            if (x.right == null)
+                return x.left;
+            if (x.left == null)
+                return x.right;
+
+            Node t = x;
+            x = min(t.right);
+            x.right = deleteMin(x.right);
+            x.left = t.left;
+        }
+        x.count = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+
+    Node min(Node x) {
+        while (x.left != null)
+            x = x.left;
+        return x;
+    }
+
+    public Iterable<Key> iterator() {
         return null;
     }
 
-    public static void main(String[] argv){
-        BST<String,Integer> st = new BST<>();
-        st.put("first",1);
+    private class Node {
+        private Key key;
+        private Value value;
+        private Node left, right;
+        private int count;
 
-        st.put("second",2);
+        public Node(Key key, Value value, int count) {
+            this.key = key;
+            this.value = value;
+            this.count = count;
+        }
 
-        st.put("third",3);
-        st.put("fourth",4);
-        st.put("fifth",5);
-        st.put("sixth",6);
-        st.put("seventh",7);
-        st.put("eigth",8);
-        st.put("ninth",9);
-        st.put("tenth",10);
-
-        System.out.println(st.ceiling("firsts"));
-
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", left=" + left +
+                    ", right=" + right +
+                    ", count=" + count +
+                    '}';
+        }
     }
 }

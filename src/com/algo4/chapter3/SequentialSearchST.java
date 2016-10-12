@@ -1,24 +1,20 @@
 package com.algo4.chapter3;
 
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
 /**
  * Created by sunilpatil on 10/3/16.
  */
 public class SequentialSearchST<Key, Value> {
     private Node first;
 
-    private class Node{
-        Key key;
-        Value value;
-        Node next;
+    public static void main(String[] argv) {
+        SequentialSearchST<String, Integer> st = new SequentialSearchST<>();
+        System.out.println(st.get("first"));
+        st.put("first", 1);
+        st.put("second", 2);
+        st.put("third", 3);
+        System.out.println(st.get("first"));
+        System.out.println(st.get("third"));
 
-        public Node(Key key, Value value, Node next){
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
     }
 
     public Value get(Key key){
@@ -30,6 +26,10 @@ public class SequentialSearchST<Key, Value> {
             }
         }
         return null;
+    }
+
+    public void delete(Key key) {
+        //TODO implement delete method
     }
 
     public void put(Key key, Value value){
@@ -44,14 +44,15 @@ public class SequentialSearchST<Key, Value> {
         first = new Node(key,value, first);
     }
 
-    public static void main(String[] argv){
-        SequentialSearchST<String,Integer> st = new SequentialSearchST<>();
-        System.out.println(st.get("first"));
-        st.put("first",1);
-        st.put("second",2);
-        st.put("third",3);
-        System.out.println(st.get("first"));
-        System.out.println(st.get("third"));
+    private class Node {
+        Key key;
+        Value value;
+        Node next;
 
+        public Node(Key key, Value value, Node next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
     }
 }
