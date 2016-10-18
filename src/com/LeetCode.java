@@ -1,6 +1,6 @@
 package com;
 
-import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Created by sunilpatil on 10/16/16.
@@ -8,10 +8,10 @@ import java.util.Arrays;
 public class LeetCode {
 
     public static void main(String[] argv) {
-        int[] nums = new int[]{3, 2, 2, 3};
         LeetCode leetCode = new LeetCode();
-        System.out.println(leetCode.removeElement(nums, 3));
-        System.out.println(Arrays.toString(nums));
+
+        int[] dups = new int[]{1, 2, 1, 3, 3};
+        System.out.println(leetCode.singleNumber1(dups));
     }
 
     /**
@@ -33,5 +33,32 @@ public class LeetCode {
             start++;
         }
         return end;
+    }
+
+    /**
+     * Given an array of integers, every element appears twice except for one. Find that single one.
+     */
+
+    public int singleNumber(int[] nums) {
+        HashSet<Integer> hs = new HashSet();
+        for (int i = 0; i < nums.length; i++) {
+            if (!hs.contains(nums[i])) {
+                hs.add(nums[i]);
+            } else
+                hs.remove(nums[i]);
+        }
+        if (!hs.isEmpty() && hs.size() == 1)
+            return hs.iterator().next();
+        else
+            return -1;
+    }
+
+    public int singleNumber1(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            res = res ^ nums[i];
+            System.out.println(res);
+        }
+        return res;
     }
 }
