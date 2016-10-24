@@ -25,7 +25,17 @@ public class BinarySearchTree {
         integerBinarySearchTree.insert(10);
 
 
-        System.out.println("Height of the binary tree " + integerBinarySearchTree.height());
+        System.out.println("Height of the binary tree " + integerBinarySearchTree.maxHeight());
+        System.out.println("Min Height " + integerBinarySearchTree.minHeight());
+        System.out.println("Max Height " + integerBinarySearchTree.maxHeight());
+        System.out.println("isBalanced " + integerBinarySearchTree.isBalanced());
+
+        ArrayList<LinkedList> levelOrderList = integerBinarySearchTree.getLevelOrderLinkedList();
+        for (LinkedList<TreeNode> levelList : levelOrderList) {
+            for (TreeNode i : levelList)
+                System.out.print(i.getData() + " ");
+            System.out.println();
+        }
 
        /* Iterator it = integerBinarySearchTree.postOrder();
         while(it.hasNext()){
@@ -151,16 +161,16 @@ public class BinarySearchTree {
      *
      * @return
      */
-    public int height() {
-        return height(root);
+    public int maxHeight() {
+        return maxHeight(root);
     }
 
-    public int height(TreeNode root) {
+    public int maxHeight(TreeNode root) {
         if (root == null)
             return 0;
         else {
-            int leftHeight = height(root.left);
-            int rightHeight = height(root.right);
+            int leftHeight = maxHeight(root.left);
+            int rightHeight = maxHeight(root.right);
 
             //Figure out which side of the tree is longer and use that
             if (leftHeight > rightHeight) {
@@ -168,6 +178,23 @@ public class BinarySearchTree {
             } else {
                 return rightHeight + 1;
             }
+        }
+    }
+
+    public int minHeight() {
+        return minHeight(root);
+    }
+
+    public int minHeight(TreeNode node) {
+        if (node == null)
+            return 0;
+        else {
+            int leftHeight = minHeight(node.left);
+            int rightHeight = minHeight(node.right);
+            if (leftHeight < rightHeight)
+                return leftHeight + 1;
+            else
+                return rightHeight + 1;
         }
     }
 
@@ -184,13 +211,47 @@ public class BinarySearchTree {
     }
 
     public void printLevelOrder() {
-        int height = height();
+        int height = maxHeight();
         for (int i = 1; i <= height; i++) {
             System.out.print("Level -> " + i + " -   > ");
             printGivenLevel(root, i);
             System.out.println();
         }
     }
+
+    /**
+     * Given a binary search tree, design an algorithm which creates a linked list
+     * of all the nodes at each depth
+     * (eg, if you have a tree with depth D, you’ll have D linked lists).
+     *
+     * @param
+     */
+    public ArrayList<LinkedList> getLevelOrderLinkedList() {
+        int height = maxHeight();
+        ArrayList<LinkedList> listOfLevelNodes = new ArrayList<>();
+        for (int i = 1; i < height; i++) {
+            LinkedList<TreeNode> linkedList = new LinkedList<>();
+            collectNodesAtLevel(root, i, linkedList);
+            listOfLevelNodes.add(linkedList);
+        }
+        return listOfLevelNodes;
+    }
+
+    public void collectNodesAtLevel(TreeNode node, int level, LinkedList<TreeNode> nodes) {
+        if (node == null)
+            return;
+        if (level == 1) {
+            nodes.add(node);
+            return;
+        }
+        if (level > 1) {
+            collectNodesAtLevel(node.left, level - 1, nodes);
+            collectNodesAtLevel(node.right, level - 1, nodes);
+        }
+
+
+    }
+
 
     public void insert(Integer data) {
         root = insert(data, root);
@@ -226,5 +287,24 @@ public class BinarySearchTree {
         else
             node.data = data;
         return node;
+    }
+
+    public boolean isBalanced() {
+        return isBalanced(this);
+    }
+
+    /**
+     * Implement a function to check if a tree is balanced. For the purposes of this question,
+     * a balanced tree is de ned to be a tree such that no two leaf nodes di er in distance from the root by more than one.
+     */
+    public boolean isBalanced(BinarySearchTree tree) {
+        int maxHeight = tree.maxHeight();
+        int minHeight = tree.minHeight();
+
+        int diff = maxHeight - minHeight;
+        if (diff <= 1)
+            return true;
+        else
+            return false;
     }
 }
