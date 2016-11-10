@@ -20,4 +20,6 @@ public class InsertionSortTest extends BaseSortTest {
         insertionSort.sort(a);
         assert super.isSorted(a);
     }
+
+
 }
