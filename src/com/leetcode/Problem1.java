@@ -14,29 +14,19 @@ package com.leetcode;
  */
 public class Problem1 {
 
+
     public int[] twoSum(int[] num, int target) {
         for (int i = 0; i < num.length; i++) {
             int first = num[i];
-            int second = binarySearch(num, target - first);
-            if (second != -1)
-                return new int[]{i, second};
+            for (int j = i + 1; j < num.length; j++) {
+                if (num[i] + num[j] == target) {
+                    System.out.printf("i -> %d j -> %d , num[i] ->%d, num[j] ->%d", i, j, num[i], num[j]);
+                    return new int[]{i, j};
+                }
+            }
         }
         return null;
     }
 
-    public int binarySearch(int[] a, int t) {
-        int lo = 0;
-        int hi = a.length;
-        while (lo < hi) {
-            int mid = lo + ((hi - lo) / 2);
-            if (a[mid] == t)
-                return mid;
-            else if (t < a[mid]) {
-                hi = mid - 1;
-            } else if (t > a[mid]) {
-                lo = mid + 1;
-            }
-        }
-        return -1;
-    }
+
 }

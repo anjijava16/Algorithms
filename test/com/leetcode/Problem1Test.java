@@ -16,25 +16,25 @@ public class Problem1Test {
         problem1 = new Problem1();
     }
 
-    @Test
-    public void testBinarySearch() {
-        assert problem1.binarySearch(new int[]{1, 2, 3, 4, 5}, 3) == 2;
-        assert problem1.binarySearch(new int[]{1, 2, 3, 4, 5}, 0) == -1;
-        assert problem1.binarySearch(new int[]{1, 2, 3, 4, 5}, 7) == -1;
-    }
+
 
     @Test
     public void testSum() {
         int[] a = new int[]{1, 2, 3, 4, 5};
         int[] sumParis = problem1.twoSum(a, 8);
-
+        assert sumParis != null;
+        assert sumParis[0] == 3;
+        assert sumParis[1] == 5;
         System.out.println(Arrays.toString(sumParis));
     }
 
     @Test
     public void testSum1() {
-        int[] a = new int[]{0, 4, 3, 0};
-        int[] sumParis = problem1.twoSum(a, 8);
+        int[] a = new int[]{3, 2, 4};
+        int[] sumParis = problem1.twoSum(a, 6);
+        assert sumParis != null;
+        assert sumParis[0] == 1;
+        assert sumParis[1] == 2;
 
         System.out.println(Arrays.toString(sumParis));
 
