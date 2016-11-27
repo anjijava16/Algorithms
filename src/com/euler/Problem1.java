@@ -1,5 +1,7 @@
 package com.euler;
 
+import java.util.Scanner;
+
 /**
  * Created by sunilpatil on 11/8/16.
  * If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -8,18 +10,26 @@ package com.euler;
  */
 public class Problem1 {
 
-    public static void main(String[] argv) {
-        Problem1 problem1 = new Problem1();
-        System.out.println("Sum of 10 " + problem1.getSum(10));
-        System.out.println("Sum of 1000 " + problem1.getSum(1000));
-
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        long t = in.nextLong();
+        for (int a0 = 0; a0 < t; a0++) {
+            int n = in.nextInt();
+            long count = getSum(n);
+            System.out.println(count);
+        }
     }
 
-    public long getSum(int n) {
+    public static long getSum(long n) {
         long returnValue = 0;
-        for (int i = 0; i < n; i++) {
-            if (i % 3 == 0 || i % 5 == 0)
-                returnValue = returnValue + i;
+        for (int i = 3; i < n; i = i + 3) {
+            returnValue = returnValue + i;
+        }
+        for (int i = 5; i < n; i = i + 5) {
+            returnValue = returnValue + i;
+        }
+        for (int i = 15; i < n; i = i + 15) {
+            returnValue = returnValue - i;
         }
         return returnValue;
     }
