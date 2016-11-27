@@ -2,7 +2,6 @@ package com.coursera.ada1.week4;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by sunilpatil on 11/25/16.
@@ -24,7 +23,7 @@ public class TopologicalSort {
         for (Vertex v : vertexList) {
             if (marked.contains(v) == false) {
                 dfsR(v);
-                v.setTopologicalOrder(currentLabel--);
+                //  v.setTopologicalOrder(currentLabel--);
             }
         }
     }
@@ -40,24 +39,5 @@ public class TopologicalSort {
         source.setTopologicalOrder(currentLabel--);
     }
 
-    public void dfs(Vertex source) {
-        Stack<Vertex> vertices = new Stack<>();
-        marked.add(source);
-        vertices.push(source);
 
-        while (!vertices.empty()) {
-            Vertex currentVertex = vertices.pop();
-            if (!currentVertex.equals(source))
-                currentVertex.setTopologicalOrder(currentLabel--);
-            System.out.print(currentVertex + " -> ");
-
-            List<Edge> edgeList = currentVertex.getEdgeList();
-            for (Edge edge : edgeList) {
-                if (!marked.contains(edge.getTarget())) {
-                    vertices.push(edge.getTarget());
-                    marked.add(edge.getTarget());
-                }
-            }
-        }
-    }
 }

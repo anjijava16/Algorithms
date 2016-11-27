@@ -62,8 +62,6 @@ public class Edge {
     @Override
     public String toString() {
         return "Edge{" +
-                "label='" + label + '\'' +
-                ", source=" + source +
                 ", target=" + target +
                 '}';
     }

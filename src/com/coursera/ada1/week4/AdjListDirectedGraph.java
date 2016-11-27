@@ -1,6 +1,7 @@
 package com.coursera.ada1.week4;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -8,27 +9,25 @@ import java.util.List;
  */
 public class AdjListDirectedGraph {
 
+    HashMap<String, Vertex> vertexHashMap;
     private List<Vertex> vertexList;
 
     public AdjListDirectedGraph() {
         this.vertexList = new ArrayList<>();
+        this.vertexHashMap = new HashMap<>();
     }
 
     public Vertex addVertex(String label) {
-        if (containsVertex(label))
-            return getVertex(label);
+        //if (containsVertex(label))
+        //    return getVertex(label);
         Vertex v = new Vertex(label);
         this.vertexList.add(v);
+        this.vertexHashMap.put(label, v);
         return v;
     }
 
     public Vertex getVertex(String source) {
-        for (Vertex v : vertexList) {
-            if (v.getLabel().equals(source)) {
-                return v;
-            }
-        }
-        return null;
+        return vertexHashMap.get(source);
     }
 
     public boolean containsVertex(String label) {
@@ -37,13 +36,16 @@ public class AdjListDirectedGraph {
     }
 
     public void addEdge(String source, String target) {
-        if (!containsVertex(source) || !containsVertex(target))
-            return;
+        //    if (!containsVertex(source) || !containsVertex(target))
+        //        return;
         Vertex sourceVertex = getVertex(source);
         Vertex targetVertex = getVertex(target);
         Edge edge = new Edge();
         edge.setSource(sourceVertex);
         edge.setTarget(targetVertex);
+        if (sourceVertex == null) {
+            System.out.println("About to throw nullpointerexception " + source + " " + sourceVertex);
+        }
         sourceVertex.getEdgeList().add(edge);
 
     }
@@ -72,5 +74,12 @@ public class AdjListDirectedGraph {
 
     public int getVertexCount() {
         return this.vertexList.size();
+    }
+
+
+    public void printGraph() {
+        for (Vertex v : vertexList) {
+            System.out.println(v.getLabel() + ", " + v.getTopologicalOrder() + " -> " + v.getEdgeList());
+        }
     }
 }

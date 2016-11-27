@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class Vertex {
     public List<Edge> edgeList;
+    String leader;
     private String label;
     private int topologicalOrder;
 
@@ -48,6 +49,15 @@ public class Vertex {
         this.topologicalOrder = topologicalOrder;
     }
 
+
+    public String getLeader() {
+        return leader;
+    }
+
+    public void setLeader(String leader) {
+        this.leader = leader;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,7 +76,7 @@ public class Vertex {
     @Override
     public String toString() {
         return "{ " +
-                label + " " + topologicalOrder +
+                label + " " + topologicalOrder + " " + leader +
                 " }";
     }
 }
