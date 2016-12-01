@@ -1,5 +1,6 @@
 package com.leetcode;
 
+import com.coursera.ada1.week5.MaxHeap;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,5 +58,23 @@ public class Problem451Test {
         System.out.println("Return value " + s);
         assert s.equals("a");
 
+    }
+
+    @Test
+    public void testSimple5() {
+        Problem451 problem = new Problem451();
+        String s = problem.frequencySort("raaeaedere");
+        System.out.println("Return value " + s);
+        assert s.equals("eeeeaaarrd");
+    }
+
+    @Test
+    public void testMaxHeap() {
+        Problem451.CharFrequency[] charFrequency = new Problem451.CharFrequency[4];
+        charFrequency[0] = new Problem451.CharFrequency('e', 4);
+        charFrequency[0] = new Problem451.CharFrequency('a', 3);
+        charFrequency[0] = new Problem451.CharFrequency('e', 4);
+
+        MaxHeap maxHeap = new MaxHeap(charFrequency);
     }
 }

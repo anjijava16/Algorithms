@@ -36,7 +36,7 @@ public class Problem451 {
             public int compare(CharFrequency o1, CharFrequency o2) {
                 if (o1.frequency > o2.frequency)
                     return -1;
-                return 0;
+                return 1;
             }
         });
         //Insert non empty char frequency into priority queue
@@ -56,13 +56,20 @@ public class Problem451 {
         return returnStr.toString();
     }
 
-    public static final class CharFrequency {
+    public static final class CharFrequency implements Comparable<CharFrequency> {
         char c;
         int frequency;
 
         public CharFrequency(char c, int frequency) {
             this.c = c;
             this.frequency = frequency;
+        }
+
+        @Override
+        public int compareTo(CharFrequency o) {
+            if (this.frequency < o.frequency)
+                return -1;
+            return 1;
         }
     }
 }
