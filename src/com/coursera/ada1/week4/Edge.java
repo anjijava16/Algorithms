@@ -7,6 +7,7 @@ public class Edge {
     private String label;
     private Vertex source;
     private Vertex target;
+    private int weight;
 
     public Edge() {
     }
@@ -39,6 +40,14 @@ public class Edge {
         this.target = target;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,7 +71,7 @@ public class Edge {
     @Override
     public String toString() {
         return "Edge{" +
-                ", target=" + target +
+                ", target=" + target + ", weight=" + weight +
                 '}';
     }
 }

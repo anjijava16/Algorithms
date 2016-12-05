@@ -36,24 +36,29 @@ public class AdjListDirectedGraph {
     }
 
     public void addEdge(String source, String target) {
-        //    if (!containsVertex(source) || !containsVertex(target))
-        //        return;
         Vertex sourceVertex = getVertex(source);
         Vertex targetVertex = getVertex(target);
-        Edge edge = new Edge();
-        edge.setSource(sourceVertex);
-        edge.setTarget(targetVertex);
-        if (sourceVertex == null) {
-            System.out.println("About to throw nullpointerexception " + source + " " + sourceVertex);
-        }
-        sourceVertex.getEdgeList().add(edge);
-
+        this.addEdge(sourceVertex, targetVertex);
     }
 
     public void addEdge(Vertex sourceVertex, Vertex targetVertex) {
         Edge edge = new Edge();
         edge.setSource(sourceVertex);
         edge.setTarget(targetVertex);
+        sourceVertex.getEdgeList().add(edge);
+    }
+
+    public void addEdge(String source, String target, int weight) {
+        Vertex sourceVertex = getVertex(source);
+        Vertex targetVertex = getVertex(target);
+        this.addEdge(sourceVertex, targetVertex, weight);
+    }
+
+    public void addEdge(Vertex sourceVertex, Vertex targetVertex, int weight) {
+        Edge edge = new Edge();
+        edge.setSource(sourceVertex);
+        edge.setTarget(targetVertex);
+        edge.setWeight(weight);
         sourceVertex.getEdgeList().add(edge);
     }
 
