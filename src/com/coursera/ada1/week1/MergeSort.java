@@ -7,6 +7,13 @@ public class MergeSort {
 
     int[] temp;
 
+    public static void main(String[] argv) {
+        int[] a = new int[]{5, 3, 8, 9, 1, 7, 0, 2, 6, 4};
+
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.sort(a);
+    }
+
     public void sort(int[] a) {
         temp = new int[a.length];
         sort(a, 0, a.length - 1);
@@ -21,7 +28,6 @@ public class MergeSort {
             merge(a, start,middle,end);
         }
     }
-
 
     public  void merge(int[] a, int lo, int mid, int hi){
         int i =lo, j = mid+1;
@@ -43,7 +49,6 @@ public class MergeSort {
             }
         }
     }
-
 
     public boolean less(int a, int b) {
         return a < b;

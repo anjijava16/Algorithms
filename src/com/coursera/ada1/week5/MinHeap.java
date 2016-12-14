@@ -18,6 +18,10 @@ public class MinHeap<Key extends Comparable<Key>> {
         swim(c);
     }
 
+    public Key peek() {
+        return a[1];
+    }
+
     public Key getMin() {
         //
         Key returnValue = a[1];
@@ -58,5 +62,9 @@ public class MinHeap<Key extends Comparable<Key>> {
         Key t = a[f];
         a[f] = a[s];
         a[s] = t;
+    }
+
+    public int getSize() {
+        return c;
     }
 }

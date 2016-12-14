@@ -6,17 +6,18 @@ import org.junit.Test;
  * Created by sunilpatil on 11/29/16.
  */
 public class MaxHeapTest {
+
     @Test
-    public void testSimple() {
+    public void testMaxInsert() {
         Integer[] a = new Integer[5];
         MaxHeap<Integer> maxHeap = new MaxHeap<>(a);
         maxHeap.insert(10);
         maxHeap.insert(5);
         maxHeap.insert(7);
 
-        assert maxHeap.getMin() == 10;
-        assert maxHeap.getMin() == 7;
-        assert maxHeap.getMin() == 5;
+        assert maxHeap.getMax() == 10;
+        assert maxHeap.getMax() == 7;
+        assert maxHeap.getMax() == 5;
     }
 
     @Test
@@ -33,15 +34,15 @@ public class MaxHeapTest {
         maxHeap.insert(12);
         maxHeap.insert(9);
 
-        assert maxHeap.getMin() == 13;
-        assert maxHeap.getMin() == 12;
-        assert maxHeap.getMin() == 11;
-        assert maxHeap.getMin() == 9;
-        assert maxHeap.getMin() == 9;
-        assert maxHeap.getMin() == 8;
-        assert maxHeap.getMin() == 6;
-        assert maxHeap.getMin() == 5;
-        assert maxHeap.getMin() == 4;
+        assert maxHeap.getMax() == 13;
+        assert maxHeap.getMax() == 12;
+        assert maxHeap.getMax() == 11;
+        assert maxHeap.getMax() == 9;
+        assert maxHeap.getMax() == 9;
+        assert maxHeap.getMax() == 8;
+        assert maxHeap.getMax() == 6;
+        assert maxHeap.getMax() == 5;
+        assert maxHeap.getMax() == 4;
 
     }
 }
